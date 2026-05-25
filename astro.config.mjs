@@ -4,6 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   // Dominio base del sitio (reemplazar con el dominio real cuando esté disponible)
   site: 'https://ahumadoycarbon.cl',
@@ -29,5 +31,7 @@ export default defineConfig({
         ]
       }
     }
-  }
+  },
+
+  adapter: cloudflare()
 });
