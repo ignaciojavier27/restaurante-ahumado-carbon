@@ -9,30 +9,99 @@ import izquierdaSketch from "../assets/images/bg-sketch/izquierda.png";
 import frameTexture from "../assets/images/bg-sketch/frame.png";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 
+const SITE_URL = "https://ahumadoycarbon.cl";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.webp`;
+
 interface Props {
 	title?: string;
 	description?: string;
+	/** Ruta relativa a la página actual, ej: "/carta". Si no se pasa, se usa Astro.url.pathname */
+	canonicalPath?: string;
+	/** URL absoluta de la imagen OG. Por defecto usa /og-image.webp */
+	ogImage?: string;
+	/** true para páginas legales o internas que no deben indexarse */
+	noIndex?: boolean;
 }
 
 const {
 	title = "Ahumado & Carbón – Brasería de Barrio | Carnes Premium y Hamburguesas",
 	description = "Ahumado & Carbón ofrece una experiencia rústica urbana de gastronomía a la leña, con carnes premium de cocción lenta y hamburguesas artesanales de autor.",
+	canonicalPath,
+	ogImage = DEFAULT_OG_IMAGE,
+	noIndex = false,
 } = Astro.props;
+
+const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, SITE_URL).href;
+
+const websiteJsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: "Ahumado & Carbón",
+	url: SITE_URL,
+	description: "Brasería de barrio. Gastronomía rústica urbana con carnes premium de cocción lenta y hamburguesas artesanales.",
+	inLanguage: "es",
+	potentialAction: {
+		"@type": "SearchAction",
+		target: {
+			"@type": "EntryPoint",
+			urlTemplate: `${SITE_URL}/carta`,
+		},
+		"query-input": "Ver carta del restaurante",
+	},
+});
 ---
 
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link
-			rel="icon"
-			type="image/svg+xml"
-			href="src/assets/images/logo.png"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+
+		<!-- Primary Meta -->
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		{noIndex
+			? <meta name="robots" content="noindex, follow" />
+			: <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+		}
+		<meta name="theme-color" content="#cb3233" />
+
+		<!-- Canonical -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_CL" />
+		<meta property="og:site_name" content="Ahumado & Carbón" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:type" content="image/webp" />
+		<meta property="og:image:alt" content="Ahumado & Carbón – Brasería de Barrio" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content="Ahumado & Carbón – Brasería de Barrio" />
+
+		<!-- Sitemap reference -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<!-- JSON-LD: WebSite (present on every page) -->
+		<script type="application/ld+json" set:html={websiteJsonLd} />
+
+		<!-- Slot extra para JSON-LD o meta adicionales por página -->
+		<slot name="head" />
+
 		<ClientRouter />
 	</head>
 	<body
@@ -53,14 +122,14 @@ const {
 			<div
 				class="absolute rotate-[25deg] right-[-60px] top-[-40px] w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[480px] opacity-[0.15] sm:opacity-[0.18]"
 			>
-				<img src={derechaSketch.src} alt="" class="w-full h-auto" />
+				<img src={derechaSketch.src} alt="" aria-hidden="true" class="w-full h-auto" />
 			</div>
 
 			<!-- Izquierda: desde abajo hacia arriba -->
 			<div
 				class="absolute left-[-60px] bottom-[-20px] rotate-[10deg] w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[480px] opacity-[0.15] sm:opacity-[0.18]"
 			>
-				<img src={izquierdaSketch.src} alt="" class="w-full h-auto" />
+				<img src={izquierdaSketch.src} alt="" aria-hidden="true" class="w-full h-auto" />
 			</div>
 		</div>
 

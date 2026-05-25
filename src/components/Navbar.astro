@@ -142,6 +142,12 @@ import logo from "../assets/images/logo.png";
 </header>
 
 <script>
+  declare global {
+    interface Window {
+      _navbarScrollHandler?: EventListenerOrEventListenerObject;
+    }
+  }
+
   function setupNavbar() {
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");

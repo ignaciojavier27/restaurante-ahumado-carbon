@@ -1,11 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const contactJsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "ContactPage",
+	"@id": "https://ahumadoycarbon.cl/contacto#contactpage",
+	url: "https://ahumadoycarbon.cl/contacto",
+	name: "Contacto – Ahumado & Carbón",
+	description: "Contáctanos o reserva una mesa en Ahumado & Carbón. Brasería de barrio en Av. del Fuego 452, Santiago.",
+	inLanguage: "es",
+	isPartOf: { "@id": "https://ahumadoycarbon.cl/#restaurant" },
+});
+
+const breadcrumbJsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "Inicio", item: "https://ahumadoycarbon.cl" },
+		{ "@type": "ListItem", position: 2, name: "Contacto", item: "https://ahumadoycarbon.cl/contacto" },
+	],
+});
 ---
 
 <Layout
+  canonicalPath="/contacto"
   title="Contacto | Ahumado & Carbón – Brasería de Barrio"
-  description="Escríbenos o haz tu reserva en Ahumado & Carbón. Estamos a tu disposición para brindarte la mejor experiencia."
+  description="Contáctanos o reserva una mesa en Ahumado & Carbón. Brasería de barrio en Av. del Fuego 452, Santiago. Te respondemos a la brevedad."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={contactJsonLd} />
+    <script type="application/ld+json" set:html={breadcrumbJsonLd} />
+  </Fragment>
   <section id="contacto" class="w-full min-h-screen pt-14 pb-24 relative flex flex-col items-center justify-center">
     <!-- Component Header -->
     <header class="text-center mt-4 mb-16 px-5 sm:px-0 relative flex flex-col items-center justify-center w-full">

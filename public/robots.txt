@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /terminos-y-condiciones
+Disallow: /politicas-de-privacidad
+
+Sitemap: https://ahumadoycarbon.cl/sitemap-index.xml

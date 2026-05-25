@@ -3,9 +3,72 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Concept from '../components/Concept.astro';
 import InfoSection from '../components/InfoSection.astro';
+
+const restaurantJsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Restaurant",
+	"@id": "https://ahumadoycarbon.cl/#restaurant",
+	name: "Ahumado & Carbón",
+	description: "Brasería de barrio con gastronomía rústica urbana. Carnes premium de cocción lenta y hamburguesas artesanales de autor en Santiago.",
+	url: "https://ahumadoycarbon.cl",
+	image: "https://ahumadoycarbon.cl/og-image.webp",
+	telephone: "+54114321-8765",
+	servesCuisine: ["Parrilla", "Americana", "Hamburguesas artesanales", "Carnes ahumadas"],
+	priceRange: "$$",
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: "Av. del Fuego 452",
+		addressLocality: "Barrio Gastronómico",
+		addressCountry: "CL",
+	},
+	geo: {
+		"@type": "GeoCoordinates",
+		latitude: -33.45,
+		longitude: -70.65,
+	},
+	openingHoursSpecification: [
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: ["Tuesday", "Wednesday", "Thursday"],
+			opens: "19:00",
+			closes: "23:30",
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: ["Friday", "Saturday"],
+			opens: "12:30",
+			closes: "16:00",
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: ["Friday", "Saturday"],
+			opens: "19:00",
+			closes: "00:30",
+		},
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: ["Sunday"],
+			opens: "12:30",
+			closes: "17:00",
+		},
+	],
+	hasMenu: "https://ahumadoycarbon.cl/carta",
+	reservations: "required",
+	menu: "https://ahumadoycarbon.cl/carta",
+	sameAs: [],
+	currenciesAccepted: "CLP",
+	paymentAccepted: "Efectivo, Tarjeta de débito, Tarjeta de crédito",
+});
 ---
 
-<Layout>
+<Layout
+	canonicalPath="/"
+	title="Ahumado & Carbón – Brasería de Barrio | Carnes Premium y Hamburguesas"
+	description="Ahumado & Carbón: brasería de barrio con gastronomía rústica urbana. Carnes premium de cocción lenta, hamburguesas artesanales y coctelería moderna en Santiago."
+>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={restaurantJsonLd} />
+	</Fragment>
 	<Hero />
 	<Concept />
 	<InfoSection />
