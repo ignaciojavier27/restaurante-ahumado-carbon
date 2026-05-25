@@ -1,0 +1,327 @@
+---
+import { X } from "lucide-astro";
+---
+
+<div
+  id="reservation-modal"
+  class="fixed inset-0 z-[100] flex items-end justify-center sm:items-center px-4 pb-4 sm:p-0 pointer-events-none opacity-0 transition-opacity duration-300"
+>
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+    id="reservation-backdrop"
+  >
+  </div>
+
+  <!-- Modal Panel -->
+  <div
+    class="relative w-full max-w-3xl translate-y-8 sm:translate-y-4 scale-95 opacity-0 transform overflow-hidden rounded-2xl sm:rounded-none border border-accent/30 bg-background px-6 py-10 shadow-2xl transition-all duration-300 ease-out sm:px-12 pointer-events-auto"
+    id="reservation-panel"
+  >
+    <!-- Close Button -->
+    <button
+      id="close-reservation"
+      class="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded bg-accent text-background hover:bg-accent/90 transition-transform hover:scale-105 active:scale-95"
+      aria-label="Cerrar modal"
+    >
+      <X class="h-5 w-5" />
+    </button>
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="mx-auto mb-4 flex justify-center">
+        <!-- Decoración superior (estilo plato/campana sutil) -->
+        <div class="h-1 w-16 bg-accent/50 rounded-full"></div>
+      </div>
+      <h2
+        class="font-heading text-4xl sm:text-5xl md:text-6xl text-accent uppercase mb-4 tracking-wider"
+      >
+        Reservar
+      </h2>
+      <p
+        class="font-body text-foreground/80 text-sm sm:text-base max-w-md mx-auto"
+      >
+        El estilo atemporal se encuentra con la función diaria en el corazón de
+        nuestra cocina.
+      </p>
+      <div
+        class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm sm:text-base text-accent font-medium font-body"
+      >
+        <span>+56 9 1234 5678</span>
+        <span class="hidden sm:inline text-foreground/30">|</span>
+        <span>reservas@ahumadoycarbon.com</span>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="w-full border-t border-accent/30 mb-10 relative">
+      <div class="absolute left-0 top-1 w-full border-t border-accent/10"></div>
+    </div>
+
+    <!-- Form -->
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 font-display">
+      <!-- Name -->
+      <div class="relative">
+        <div
+          class="absolute -top-3 left-4 border border-accent/40 bg-background px-3 py-0.5 z-10"
+        >
+          <label
+            class="text-[10px] font-bold italic tracking-widest text-accent uppercase"
+            >Nombre</label
+          >
+        </div>
+        <input
+          type="text"
+          placeholder="Jane Doe"
+          required
+          class="w-full bg-foreground/[0.03] border border-transparent px-4 pt-5 pb-3 text-foreground placeholder-foreground/20 outline-none focus:bg-foreground/[0.06] transition-colors"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="relative">
+        <div
+          class="absolute -top-3 left-4 border border-accent/40 bg-background px-3 py-0.5 z-10"
+        >
+          <label
+            class="text-[10px] font-bold italic tracking-widest text-accent uppercase"
+            >E-Mail</label
+          >
+        </div>
+        <input
+          type="email"
+          placeholder="jane.doe@ejemplo.com"
+          required
+          class="w-full bg-foreground/[0.03] border border-transparent px-4 pt-5 pb-3 text-foreground placeholder-foreground/20 outline-none focus:bg-foreground/[0.06] transition-colors"
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="relative">
+        <div
+          class="absolute -top-3 left-4 border border-accent/40 bg-background px-3 py-0.5 z-10"
+        >
+          <label
+            class="text-[10px] font-bold italic tracking-widest text-accent uppercase"
+            >Teléfono</label
+          >
+        </div>
+        <input
+          type="tel"
+          placeholder="+56 9 1234 5678"
+          required
+          class="w-full bg-foreground/[0.03] border border-transparent px-4 pt-5 pb-3 text-foreground placeholder-foreground/20 outline-none focus:bg-foreground/[0.06] transition-colors"
+        />
+      </div>
+
+      <!-- People -->
+      <div class="relative">
+        <div
+          class="absolute -top-3 left-4 border border-accent/40 bg-background px-3 py-0.5 z-10"
+        >
+          <label
+            class="text-[10px] font-bold italic tracking-widest text-accent uppercase"
+            >Personas</label
+          >
+        </div>
+        <select
+          class="w-full bg-foreground/[0.03] border border-transparent px-4 pt-5 pb-3 text-foreground outline-none focus:bg-foreground/[0.06] transition-colors appearance-none"
+        >
+          <option value="1" class="bg-background text-foreground"
+            >1 Persona</option
+          >
+          <option value="2" class="bg-background text-foreground" selected
+            >2 Personas</option
+          >
+          <option value="3" class="bg-background text-foreground"
+            >3 Personas</option
+          >
+          <option value="4" class="bg-background text-foreground"
+            >4 Personas</option
+          >
+          <option value="5+" class="bg-background text-foreground"
+            >5+ Personas</option
+          >
+        </select>
+        <!-- Custom dropdown arrow -->
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-accent"
+        >
+          <svg
+            class="h-4 w-4 fill-current"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Date & Time -->
+      <div class="relative">
+        <div
+          class="absolute -top-3 left-4 border border-accent/40 bg-background px-3 py-0.5 z-10"
+        >
+          <label
+            class="text-[10px] font-bold italic tracking-widest text-accent uppercase"
+            >Fecha & Hora</label
+          >
+        </div>
+        <input
+          type="datetime-local"
+          required
+          class="w-full bg-foreground/[0.03] border border-transparent px-4 pt-5 pb-3 text-foreground placeholder-foreground/20 outline-none focus:bg-foreground/[0.06] transition-colors [color-scheme:dark]"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <div class="relative mt-2 md:mt-0 h-[60px] md:h-auto">
+        <button
+          type="submit"
+          class="absolute inset-0 w-full h-full group transition-transform active:scale-[0.98]"
+        >
+          <!-- Outer border -->
+          <div
+            class="absolute inset-0 border border-accent/40 transition-colors group-hover:border-accent/80"
+          >
+          </div>
+          <!-- Inner container -->
+          <div
+            class="absolute inset-1 border border-accent/20 bg-background flex items-center justify-center transition-colors group-hover:bg-accent/5"
+          >
+            <span
+              class="font-heading text-xl uppercase tracking-widest text-accent font-bold"
+              >Reservar</span
+            >
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Definimos funciones globales para evitar múltiples listeners en el documento
+  const openReservationModal = (e?: Event) => {
+    if (e) e.preventDefault();
+    const modal = document.getElementById("reservation-modal");
+    const panel = document.getElementById("reservation-panel");
+    if (!modal || !panel) return;
+
+    modal.classList.remove("pointer-events-none");
+    modal.classList.add("opacity-100");
+    modal.classList.remove("opacity-0");
+
+    requestAnimationFrame(() => {
+      panel.classList.remove("translate-y-8", "sm:translate-y-4", "scale-95", "opacity-0");
+      panel.classList.add("translate-y-0", "scale-100", "opacity-100");
+    });
+    
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeReservationModal = () => {
+    const modal = document.getElementById("reservation-modal");
+    const panel = document.getElementById("reservation-panel");
+    if (!modal || !panel) return;
+
+    panel.classList.remove("translate-y-0", "scale-100", "opacity-100");
+    panel.classList.add("translate-y-8", "sm:translate-y-4", "scale-95", "opacity-0");
+
+    setTimeout(() => {
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0");
+      modal.classList.add("pointer-events-none");
+      document.body.style.overflow = '';
+    }, 300);
+  };
+
+  // Listeners globales (Astro solo ejecuta este top-level una vez)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const modal = document.getElementById("reservation-modal");
+      if (modal && !modal.classList.contains("opacity-0")) {
+        closeReservationModal();
+      }
+    }
+  });
+
+  const setupReservationModal = () => {
+    // 1. Buscamos el modal y elementos hijos
+    const modal = document.getElementById("reservation-modal");
+    const panel = document.getElementById("reservation-panel");
+    const backdrop = document.getElementById("reservation-backdrop");
+    const closeBtn = document.getElementById("close-reservation");
+
+    if (!modal || !panel) return;
+
+    // 2. Eventos de cierre
+    closeBtn?.addEventListener("click", closeReservationModal);
+    backdrop?.addEventListener("click", closeReservationModal);
+
+    // 3. Lógica del formulario
+    const form = modal.querySelector('form');
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const nameInput = form.querySelector('input[type="text"]') as HTMLInputElement;
+        const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
+        const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement;
+        const peopleSelect = form.querySelector('select') as HTMLSelectElement;
+        const dateInput = form.querySelector('input[type="datetime-local"]') as HTMLInputElement;
+
+        const sanitize = (str: string) => {
+          const div = document.createElement('div');
+          div.textContent = str;
+          return div.innerHTML.trim();
+        };
+
+        const name = sanitize(nameInput?.value || '');
+        const email = sanitize(emailInput?.value || '');
+        const phone = sanitize(phoneInput?.value || '');
+        const people = sanitize(peopleSelect?.value || '');
+        const datetime = sanitize(dateInput?.value || '');
+
+        if (!name || !email || !phone || !datetime) {
+          alert("Por favor, completa todos los campos obligatorios.");
+          return;
+        }
+
+        const dateObj = new Date(datetime);
+        const formattedDate = dateObj.toLocaleDateString('es-CL');
+        const formattedTime = dateObj.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+
+        const message = `Hola Ahumado y Carbón, me gustaría hacer una reserva:\n\n` +
+                        `👤 Nombre: ${name}\n` +
+                        `📧 Email: ${email}\n` +
+                        `📞 Teléfono: ${phone}\n` +
+                        `👥 Personas: ${people}\n` +
+                        `📅 Fecha: ${formattedDate}\n` +
+                        `⏰ Hora: ${formattedTime}\n\n` +
+                        `¡Quedo atento a la confirmación!`;
+
+        const phoneNumber = "56912345678";
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, "_blank");
+        
+        closeReservationModal();
+        form.reset();
+      });
+    }
+
+    // 4. Conectar los botones de la UI directamente
+    const triggers = document.querySelectorAll('[href$="#reservas"], [data-modal="reservation"], [href$="#reservar"]');
+    triggers.forEach(trigger => {
+      // Eliminar el listener anterior (por si acaso), aunque en astro:page-load los nodos son nuevos
+      trigger.removeEventListener("click", openReservationModal);
+      trigger.addEventListener("click", openReservationModal);
+    });
+  };
+
+  // Se ejecuta en la carga inicial y en cada navegación de Astro
+  document.addEventListener("astro:page-load", setupReservationModal);
+</script>

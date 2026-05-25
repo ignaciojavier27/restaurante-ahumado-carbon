@@ -1,0 +1,333 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { historiaData } from "../data/historiaData";
+
+// Import images statically
+import etapa1 from "../assets/images/linea-tiempo/etapa-1.webp";
+import etapa2 from "../assets/images/linea-tiempo/etapa-2.webp";
+import etapa3 from "../assets/images/linea-tiempo/etapa-3.webp";
+import etapa4 from "../assets/images/linea-tiempo/etapa-4.webp";
+import etapa5 from "../assets/images/linea-tiempo/etapa-5.webp";
+import etapa6 from "../assets/images/linea-tiempo/etapa-6.webp";
+
+const images = [etapa1, etapa2, etapa3, etapa4, etapa5, etapa6];
+
+// Layout positions for desktop: left, center, right, center, left, center
+// Expressed as horizontal alignment classes
+const positions = ["left", "center", "right", "center", "left", "center"] as const;
+
+// Slight rotation per item: alternating for visual interest
+// left items tilt left, center no rotation, right items tilt right
+const rotations = [-2.5, 0, 3.5, 0, -3.5, 0];
+---
+
+<Layout
+  title="Historia | Ahumado & Carbón – Brasería de Barrio"
+  description="Conoce la historia de Ahumado & Carbón, desde sus humildes comienzos alrededor del fuego hasta convertirse en una referencia de gastronomía rústica urbana en Santiago."
+>
+  <section id="historia" class="w-full min-h-screen pt-14 pb-24 relative">
+
+    <!-- Page heading -->
+    <header class="text-center mt-4 mb-0 px-5 sm:px-0 relative flex flex-col items-center justify-center w-full">
+      <h1
+        class="w-full whitespace-nowrap scale-y-[1.15] origin-center leading-none m-0 p-0 flex justify-center text-accent font-display font-extrabold uppercase"
+      >
+        <span
+          id="historia-title"
+          class="inline-block tracking-[-0.06em] text-[clamp(2rem,8.7vw,10rem)]"
+          >Nuestra Historia</span
+        >
+      </h1>
+      <p
+        class="font-body text-[clamp(0.88rem,1.4vw,1.1rem)] text-foreground opacity-90 max-w-[600px] mx-auto mt-6 mb-6 leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]"
+      >
+        Fuego, paciencia y sabores que cuentan una historia de barrio.
+      </p>
+      <div class="h-1 py-4 w-full relative">
+        <div
+          class="absolute left-0 right-0 border-b-[4px] border-dotted border-accent pointer-events-none"
+        >
+        </div>
+      </div>
+    </header>
+
+    <!-- Timeline container -->
+    <div class="timeline-container w-full max-w-[1200px] xl:max-w-[1400px] mx-auto px-4 sm:px-8 mt-16 pb-8">
+      {historiaData.map((item, index) => {
+        const pos = positions[index];
+        const rot = rotations[index];
+        const imgSrc = images[index];
+        const num = index + 1;
+
+        return (
+          <article
+            class={`timeline-item timeline-item--${pos} js-reveal`}
+            data-index={index}
+            style={`--rot: ${rot}deg;`}
+          >
+            <!-- Number badge + title row -->
+            <div class="item-header">
+              <div class="number-badge" aria-hidden="true">
+                <span>{num}</span>
+              </div>
+              <h2 class="item-title">{item.title}</h2>
+            </div>
+
+            <!-- Description -->
+            <p class="item-desc">{item.description}</p>
+
+            <!-- Image -->
+            <div class="item-img-wrap">
+              <Image
+                src={imgSrc}
+                alt={item.title}
+                class="item-img"
+                loading={index === 0 ? "eager" : "lazy"}
+                widths={[400, 700]}
+                sizes="(max-width: 640px) 90vw, 380px"
+              />
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+  </section>
+</Layout>
+
+<style>
+  /* ─── Timeline layout ─── */
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    position: relative;
+  }
+
+  /* Vertical connecting line */
+  .timeline-container::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+      to bottom,
+      #cb3233 0,
+      #cb3233 6px,
+      transparent 6px,
+      transparent 14px
+    );
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .timeline-container::before {
+      left: 1.25rem;
+    }
+  }
+
+  /* ─── Individual item ─── */
+  .timeline-item {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    /* Default: full width on mobile */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Desktop positional alignment */
+  @media (min-width: 768px) {
+    .timeline-item--left {
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .timeline-item--center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .timeline-item--right {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+
+  /* ─── Rotation: applied to the inner content wrapper ─── */
+  .item-header,
+  .item-desc,
+  .item-img-wrap {
+    transform: rotate(var(--rot, 0deg));
+    transform-origin: center center;
+  }
+
+  /* ─── Header row: badge + title ─── */
+  .item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .number-badge {
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: #000;
+    border: 2px solid #cb3233;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  }
+
+  .number-badge span {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .item-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #cb3233; /* accent */
+    margin: 0;
+    line-height: 1.25;
+    padding-top: 0.45rem;
+  }
+
+  /* ─── Description ─── */
+  .item-desc {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+    color: #f5f2ea;
+    line-height: 1.65;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  /* ─── Image ─── */
+  .item-img-wrap {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(203, 50, 51, 0.4);
+    padding: 0.35rem;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .item-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  /* ─── Reveal animation (JS-driven) ─── */
+  .js-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition:
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .js-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delay per item */
+  .js-reveal:nth-child(1) { transition-delay: 0ms; }
+  .js-reveal:nth-child(2) { transition-delay: 80ms; }
+  .js-reveal:nth-child(3) { transition-delay: 0ms; }
+  .js-reveal:nth-child(4) { transition-delay: 80ms; }
+  .js-reveal:nth-child(5) { transition-delay: 0ms; }
+  .js-reveal:nth-child(6) { transition-delay: 80ms; }
+
+  /* Mobile: align to left margin */
+  @media (max-width: 767px) {
+    .timeline-item {
+      max-width: 100%;
+      padding-left: 3rem;
+      padding-right: 0;
+    }
+
+    .timeline-item--left,
+    .timeline-item--center,
+    .timeline-item--right {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    /* Reduce rotation on mobile for readability */
+    .item-header,
+    .item-desc,
+    .item-img-wrap {
+      transform: rotate(calc(var(--rot, 0deg) * 0.4));
+    }
+  }
+</style>
+
+<script>
+  /* ─── Title auto-fit (same pattern as carta.astro) ─── */
+  function adjustTitle() {
+    const span = document.getElementById("historia-title");
+    const h1 = span?.parentElement;
+    if (!span || !h1) return;
+    const maxWidth = h1.clientWidth;
+    if (maxWidth <= 0) return;
+    let min = 12, max = 160, optimal = min;
+    for (let i = 0; i < 10; i++) {
+      const mid = Math.floor((min + max) / 2);
+      span.style.fontSize = mid + "px";
+      if (span.offsetWidth <= maxWidth) { optimal = mid; min = mid + 1; }
+      else { max = mid - 1; }
+    }
+    span.style.fontSize = optimal + "px";
+  }
+  window.addEventListener("resize", adjustTitle);
+  document.fonts.ready.then(adjustTitle);
+  document.addEventListener("astro:page-load", adjustTitle);
+  adjustTitle();
+
+  /* ─── Intersection Observer for scroll-up reveal ─── */
+  function initReveal() {
+    const items = document.querySelectorAll<HTMLElement>(".js-reveal");
+    if (!items.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            // Don't unobserve — items stay visible once shown
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    items.forEach((el) => observer.observe(el));
+  }
+
+  initReveal();
+  document.addEventListener("astro:page-load", initReveal);
+</script>

@@ -1,0 +1,169 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/hero-image-optimized.png";
+---
+
+<section
+  class="relative w-full h-[calc(100vh-80px)] md:h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-between overflow-hidden bg-transparent mt-1 pt-20 md:pt-12 pb-16"
+>
+  <div
+    class="relative z-10 flex flex-col items-center justify-center text-center w-full px-4 md:px-8"
+  >
+    <span
+      class="text-accent font-body uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-6 opacity-90"
+    >
+      Brasería de barrio
+    </span>
+
+    <h1 class="text-accent font-display font-extrabold uppercase title-main">
+      <span id="hero-title">Ahumado & Carbón</span>
+    </h1>
+
+    <div class="h-1 py-4 w-full">
+      <div class="absolute left-0 right-0 border-b-[4px] border-dotted border-accent pointer-events-none"></div>
+    </div>
+
+    <span class="text-accent font-display uppercase" id="hero-subtitle">
+      Gastronomía Rústica Urbana
+    </span>
+  </div>
+
+  <div class="relative z-10 floating-wrapper my-auto md:my-0 w-full flex justify-center">
+    <Image
+      src={heroImage}
+      alt="Especialidad Ahumado & Carbón"
+      class="w-full max-w-[340px] md:max-w-[500px] lg:max-w-[650px] h-auto object-contain drop-shadow-2xl relative bottom-[0px] md:bottom-[60px]"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <!-- Tagline esquina inferior izquierda -->
+  </div>
+  <p class="hero-tagline">
+    Carnes premium de cocción lenta y hamburguesas artesanales con toques de
+    autor, combinadas con coctelería moderna y cervezas artesanales locales.
+  </p>
+</section>
+
+
+
+<style>
+  .title-main {
+    width: 100%;
+    /* SIEMPRE una sola línea */
+    white-space: nowrap;
+    /* Más altura visual */
+    transform: scaleY(1.15);
+    transform-origin: center;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  #hero-title {
+    display: inline-block;
+    letter-spacing: -0.06em;
+    /* Fallback/Initial sizing */
+    font-size: clamp(2rem, 8.7vw, 10rem);
+  }
+
+  #hero-subtitle {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    margin-top: 1rem;
+    font-weight: 900;
+  }
+
+  @media (max-width: 768px) {
+    #hero-title {
+      letter-spacing: -0.04em;
+    }
+
+    #hero-subtitle {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .floating-wrapper {
+    animation: float 6.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-16px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  /* Tagline esquina inferior izquierda */
+  .hero-tagline {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    max-width: 320px;
+    color: #ffffff;
+    font-style: italic;
+    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    line-height: 1.55;
+    opacity: 0.9;
+    margin: 0;
+    pointer-events: none;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    z-index: 20;
+  }
+
+  @media (max-width: 768px) {
+    .hero-tagline {
+      bottom: 1.75rem;
+      left: 1.25rem;
+      max-width: 280px;
+    }
+  }
+
+
+</style>
+
+<script>
+  function adjustTitle() {
+    const span = document.getElementById("hero-title");
+    const h1 = span?.parentElement;
+    if (!span || !h1) return;
+
+    const maxWidth = h1.clientWidth;
+    if (maxWidth <= 0) return;
+
+    let min = 12; // Tamaño mínimo seguro en px
+    let max = 160; // Tamaño máximo en px (aprox 10rem) para que no crezca más en pantallas grandes
+    let optimal = min;
+
+    // Búsqueda binaria para encontrar el tamaño de fuente óptimo en píxeles
+    for (let i = 0; i < 10; i++) {
+      const mid = Math.floor((min + max) / 2);
+      span.style.fontSize = mid + "px";
+
+      if (span.offsetWidth <= maxWidth) {
+        optimal = mid;
+        min = mid + 1;
+      } else {
+        max = mid - 1;
+      }
+    }
+
+    span.style.fontSize = optimal + "px";
+  }
+
+  // Escuchar eventos para redimensionar dinámicamente y con soporte a transiciones de Astro
+  window.addEventListener("resize", adjustTitle);
+  document.fonts.ready.then(adjustTitle);
+  document.addEventListener("astro:page-load", adjustTitle);
+
+  // Ejecución inmediata
+  adjustTitle();
+</script>

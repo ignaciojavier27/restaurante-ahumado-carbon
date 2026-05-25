@@ -1,0 +1,151 @@
+---
+import { Image } from "astro:assets";
+import { Flame, Beef, Beer, UtensilsCrossed } from "lucide-astro";
+import hamburguesaImg from "../assets/images/home-images/hamburguesa.webp";
+import costillasImg from "../assets/images/home-images/costillas.webp";
+import Button from "./Button.astro";
+---
+
+<section
+  class="relative w-full bg-background z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-stretch overflow-hidden"
+>
+  <!-- Lado izquierdo: Información (60% en desktop) -->
+  <div
+    class="w-full md:w-3/5 lg:w-[60%] py-16 md:py-24 px-6 md:px-12 lg:px-20 xl:px-28 flex flex-col justify-center"
+  >
+    <h2
+      class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-8 leading-tight"
+    >
+      El fuego tiene su <br class="hidden xl:block" /><span class="text-accent"
+        >propia forma</span
+      > de cocinar
+    </h2>
+    <p
+      class="text-foreground/80 font-body text-lg md:text-xl mb-14 leading-relaxed max-w-2xl"
+    >
+      En Ahumado & Carbón transformamos ingredientes simples en experiencias que
+      se sienten desde el primer aroma. Carnes de cocción lenta, hamburguesas
+      artesanales con identidad propia y sabores que nacen entre humo, brasas y
+      tiempo bien aprovechado. Porque el buen sabor no se acelera.
+    </p>
+
+    <!-- Blocks de info -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12 mb-16"
+      id="info-blocks"
+    >
+      <div
+        class="info-block flex flex-col gap-3 translate-y-8 transition-all duration-700 ease-out"
+      >
+        <div class="bg-accent/10 w-fit p-3 rounded-xl text-accent">
+          <Flame class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-xl font-bold font-display text-foreground mb-2">
+            Cocción lenta
+          </h3>
+          <p class="text-foreground/70 font-body leading-relaxed">
+            Preparaciones hechas con tiempo, fuego y paciencia.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="info-block flex flex-col gap-3 translate-y-8 transition-all duration-700 ease-out delay-100"
+      >
+        <div class="bg-accent/10 w-fit p-3 rounded-xl text-accent">
+          <Beef class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-xl font-bold font-display text-foreground mb-2">
+            Carnes premium
+          </h3>
+          <p class="text-foreground/70 font-body leading-relaxed">
+            Selección de cortes con sabor y carácter.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="info-block flex flex-col gap-3 translate-y-8 transition-all duration-700 ease-out delay-200"
+      >
+        <div class="bg-accent/10 w-fit p-3 rounded-xl text-accent">
+          <Beer class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-xl font-bold font-display text-foreground mb-2">
+            Experiencia de barrio
+          </h3>
+          <p class="text-foreground/70 font-body leading-relaxed">
+            Cervezas artesanales y momentos para compartir.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="info-block flex flex-col gap-3 translate-y-8 transition-all duration-700 ease-out delay-300"
+      >
+        <div class="bg-accent/10 w-fit p-3 rounded-xl text-accent">
+          <UtensilsCrossed class="w-7 h-7" />
+        </div>
+        <div>
+          <h3 class="text-xl font-bold font-display text-foreground mb-2">
+            Hamburguesas
+          </h3>
+          <p class="text-foreground/70 font-body leading-relaxed">
+            Hamburguesas caseras y con ingredientes de calidad.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <Button href="/carta">Ver Menú</Button>
+    </div>
+  </div>
+
+  <!-- Lado Derecho: Imágenes (40% en desktop) -->
+  <div class="w-full md:w-2/5 lg:w-[40%] flex flex-col">
+    <!-- Contenedor 1 -->
+    <div class="w-full">
+      <Image
+        src={hamburguesaImg}
+        alt="Hamburguesa artesanal"
+        class="w-full h-auto block"
+      />
+    </div>
+    <!-- Contenedor 2 -->
+    <div class="w-full">
+      <Image
+        src={costillasImg}
+        alt="Costillas ahumadas"
+        class="w-full h-auto block"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const blocks = document.querySelectorAll(".info-block");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("opacity-0", "translate-y-8");
+              entry.target.classList.add("opacity-100", "translate-y-0");
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        }
+      );
+
+      blocks.forEach((block) => observer.observe(block));
+    }
+  });
+</script>

@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Política de Privacidad | Ahumado & Carbón – Brasería de Barrio"
+  description="Conoce nuestra política de privacidad. Te explicamos cómo recopilamos, usamos y protegemos tu información personal."
+>
+  <section class="w-full min-h-screen pt-24 pb-24 relative px-4 sm:px-8">
+    <div class="max-w-3xl mx-auto">
+      <header class="text-center mb-12">
+        <h1 class="text-accent font-display font-extrabold uppercase text-[clamp(2rem,5vw,4rem)] tracking-tight mb-4">
+          Política de Privacidad
+        </h1>
+        <p class="font-body text-foreground opacity-80 text-lg">
+          Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+        <div class="h-1 py-4 w-full relative max-w-[200px] mx-auto mt-2">
+          <div class="absolute left-0 right-0 border-b-[4px] border-dotted border-accent pointer-events-none"></div>
+        </div>
+      </header>
+
+      <div class="prose-custom max-w-none text-foreground/90 font-body">
+        <p>En Ahumado & Carbón, valoramos y respetamos su privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información personal cuando visita nuestro sitio web y utiliza nuestros servicios.</p>
+
+        <h2>1. Información que Recopilamos</h2>
+        <p>Podemos recopilar información personal que usted nos proporcione voluntariamente, como:</p>
+        <ul>
+          <li>Nombre y apellidos.</li>
+          <li>Información de contacto (correo electrónico, número de teléfono).</li>
+          <li>Detalles de sus reservas y preferencias alimentarias.</li>
+        </ul>
+
+        <h2>2. Uso de la Información</h2>
+        <p>Utilizamos la información recopilada para:</p>
+        <ul>
+          <li>Procesar y gestionar sus reservas de manera eficiente.</li>
+          <li>Enviarle confirmaciones y actualizaciones sobre nuestros servicios.</li>
+          <li>Mejorar nuestra página web y la experiencia de nuestros clientes.</li>
+          <li>Cumplir con nuestras obligaciones legales.</li>
+        </ul>
+
+        <h2>3. Protección de Datos</h2>
+        <p>Implementamos medidas de seguridad técnicas y organizativas para proteger su información personal contra accesos no autorizados, alteraciones, divulgación o destrucción. Nuestro compromiso es garantizar que sus datos estén seguros en todo momento.</p>
+
+        <h2>4. Compartir Información con Terceros</h2>
+        <p>No vendemos, comercializamos ni transferimos a terceros su información de identificación personal sin su consentimiento, excepto cuando sea necesario para operar nuestro sitio web, llevar a cabo nuestro negocio o prestarle servicio, siempre que dichas partes acuerden mantener esta información confidencial.</p>
+
+        <h2>5. Sus Derechos</h2>
+        <p>Usted tiene el derecho de acceder, corregir o eliminar su información personal en cualquier momento. Si desea ejercer estos derechos o tiene alguna pregunta sobre nuestra Política de Privacidad, no dude en ponerse en contacto con nosotros.</p>
+
+        <h2>6. Contacto</h2>
+        <p>Si tiene preguntas adicionales o requiere más información sobre nuestra Política de Privacidad, comuníquese con nosotros a través de nuestro teléfono de contacto o visite nuestro restaurante en Av. del Fuego 452, Barrio Gastronómico.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose-custom h2 {
+    font-family: var(--font-display);
+    color: #cb3233; /* accent color */
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .prose-custom p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .prose-custom ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+  }
+  .prose-custom li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .prose-custom li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #cb3233;
+    font-weight: bold;
+    font-size: 1.2em;
+    top: -2px;
+  }
+</style>

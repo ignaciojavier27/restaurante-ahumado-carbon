@@ -1,0 +1,291 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { menuData } from "../data/menuData";
+
+// Import Menu Images dynamically
+const images = import.meta.glob<{ default: any }>('../assets/images/menu/**/*.{jpeg,jpg,png,gif,webp}');
+---
+
+<Layout
+  title="Menú | Ahumado & Carbón – Brasería de Barrio"
+  description="Descubre el menú completo de Ahumado & Carbón: entrantes, carnes a la parrilla, hamburguesas artesanales, acompañamientos, bebidas y postres. Gastronomía rústica urbana en Santiago."
+>
+  <section id="carta" class="w-full min-h-screen pt-14 pb-20 relative">
+    <!-- Page heading -->
+    <header
+      class="text-center mt-4 mb-8 sm:mb-12 px-5 sm:px-0 relative flex flex-col items-center justify-center w-full"
+    >
+      <h1
+        class="w-full whitespace-nowrap scale-y-[1.15] origin-center leading-none m-0 p-0 flex justify-center text-accent font-display font-extrabold uppercase"
+      >
+        <span
+          id="carta-title"
+          class="inline-block tracking-[-0.06em] text-[clamp(2rem,8.7vw,10rem)]"
+          >Nuestra Carta</span
+        >
+      </h1>
+      <p
+        class="font-body text-[clamp(0.88rem,1.4vw,1.1rem)] text-foreground opacity-95 max-w-[600px] mx-auto mt-6 mb-6 leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]"
+      >
+        Cocina a la leña, ingredientes honestos y sabores que se quedan.
+      </p>
+      <div class="h-1 py-4 w-full relative">
+        <div
+          class="absolute left-0 right-0 border-b-[4px] border-dotted border-accent pointer-events-none"
+        >
+        </div>
+      </div>
+    </header>
+
+    <div class="w-full max-w-[100%] mx-auto mt-8 px-0 box-border">
+      <!-- Two columns layout: Column A (70%) + Column B (30%) -->
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[8fr_2fr] gap-0 items-stretch w-full"
+      >
+        <!-- COLUMNA A (70%) -->
+        <div class="w-full">
+          <!-- Layout: sidebar + content -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] h-full gap-4 sm:gap-8 py-8 px-4 sm:px-8 overflow-hidden [background:radial-gradient(circle_at_50%_50%,#ffffff_60%,#faf8f5_100%)]"
+          >
+            <nav
+              class="flex flex-wrap sm:flex-col border border-[#e5e5e5] sm:border-0 sm:border-r sm:border-[#e5e5e5] p-2 sm:p-0 sm:py-2 bg-[#faf9f6]/80 sm:bg-transparent rounded-lg sm:rounded-none gap-2 sm:gap-0 mb-4 sm:mb-0"
+              role="tablist"
+              aria-label="Categorías del menú"
+            >
+              <button
+                class="tab-btn active block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="entrantes"
+                aria-selected="true"
+                id="tab-entrantes">Entrantes</button
+              >
+              <button
+                class="tab-btn block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="parrilla"
+                aria-selected="false"
+                id="tab-parrilla">Parrilla</button
+              >
+              <button
+                class="tab-btn block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="hamburguesas"
+                aria-selected="false"
+                id="tab-hamburguesas">Hamburguesas</button
+              >
+              <button
+                class="tab-btn block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="acompanamientos"
+                aria-selected="false"
+                id="tab-acompanamientos">Acompañamientos</button
+              >
+              <button
+                class="tab-btn block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="bebidas"
+                aria-selected="false"
+                id="tab-bebidas">Bebidas</button
+              >
+              <button
+                class="tab-btn block flex-auto sm:flex-none cursor-pointer transition-all duration-150 p-[0.7rem_0.8rem] sm:p-[1rem_1.5rem] font-display text-[0.7rem] sm:text-[0.85rem] uppercase tracking-wider text-[#555] whitespace-nowrap sm:whitespace-normal border border-transparent rounded-md sm:rounded-none [&.active]:border-[#e5e5e5] sm:[&.active]:border-r-transparent [&.active]:bg-white sm:[&.active]:bg-[#faf2f0] [&.active]:text-accent [&.active]:font-extrabold relative z-10 mb-0 sm:mb-0 mr-0 sm:mr-[-1px] text-center sm:text-left hover:text-accent [&.active]:shadow-sm sm:[&.active]:shadow-none leading-tight"
+                role="tab"
+                data-tab="postres"
+                aria-selected="false"
+                id="tab-postres">Postres</button
+              >
+            </nav>
+
+            <!-- RIGHT CONTENT AREA -->
+            <div
+              class="p-[1.5rem_1.25rem] sm:p-[2rem_2.5rem] min-h-0 sm:min-h-[520px]"
+            >
+              {menuData.map((category) => (
+                <div
+                  id={`panel-${category.id}`}
+                  class={`tab-panel ${category.id === "entrantes" ? "active" : ""} hidden [&.active]:block opacity-0 translate-y-[6px] [&.active]:animate-[fadeUp_0.28s_ease_forwards]`}
+                  role="tabpanel"
+                  aria-labelledby={`tab-${category.id}`}
+                >
+                  <div class="mb-7 pb-4 border-b border-[#eee]">
+                    <h2 class="w-full text-center scale-y-[1.12] origin-center leading-none m-0 p-0 flex justify-center text-accent font-display font-extrabold uppercase text-[clamp(1.5rem,2.6vw,2.2rem)] tracking-tight mb-2">
+                      {category.title}
+                    </h2>
+                    <p class="font-body text-sm text-[#888] italic m-0 text-center mb-6">
+                      {category.subtitle}
+                    </p>
+                  </div>
+                  <ul class="list-none p-0 m-0">
+                    {category.items.map((item) => (
+                      <li class="flex items-start justify-between gap-4 sm:gap-6 py-4 border-b-2 border-dotted border-[#f6f6f6] last:border-b-0">
+                        <div class="flex-1 min-w-0">
+                          <h3 class="font-body text-[clamp(0.9rem,1.3vw,1rem)] font-bold text-[#1a1a1a] leading-snug flex items-center flex-wrap gap-1.5 mb-1 uppercase tracking-wider">
+                            {item.name}
+                            {item.badge && (
+                              <span
+                                class={
+                                  item.badge.style === 'default'
+                                    ? "text-[0.65rem] font-semibold text-accent bg-[rgba(203,50,51,0.08)] border border-[rgba(203,50,51,0.18)] px-1.5 py-0.5 rounded-full tracking-wider font-display normal-case"
+                                    : item.badge.style === 'veggie'
+                                    ? "text-[0.6rem] font-bold px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/25 tracking-wider uppercase font-display"
+                                    : "text-[0.6rem] font-bold px-1.5 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/25 tracking-wider uppercase font-display"
+                                }
+                              >
+                                {item.badge.text}
+                              </span>
+                            )}
+                          </h3>
+                          <p class="font-body text-[0.82rem] text-[#777] leading-relaxed m-0">
+                            {item.description}
+                          </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-end sm:items-start gap-2.5 sm:gap-4 shrink-0">
+                          {item.image && images[item.image] ? (
+                            <Image
+                              src={images[item.image]()}
+                              alt={item.name}
+                              class="w-16 h-16 sm:w-20 sm:h-20 rounded-md object-cover shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-[#eaeaea] block lg:hidden"
+                              loading="lazy"
+                            />
+                          ) : null}
+                          <span class="font-display text-[clamp(0.9rem,1.3vw,1rem)] font-black text-[#1a1a1a] whitespace-nowrap pt-0.5">
+                            {item.price}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div><!-- /tab-panels -->
+          </div><!-- /menu-layout -->
+        </div><!-- /columna-a -->
+
+        <!-- COLUMNA B (30%) -->
+        <div class="w-full h-full hidden lg:block">
+          <div class="col-b-wrapper w-full h-full flex flex-col">
+            {menuData.map((category) => {
+              // Filtrar solo los items que tienen imagen
+              const itemsConImagen = category.items.filter(item => item.image);
+              // Tomar hasta 3
+              const top3 = itemsConImagen.slice(0, 3);
+
+              return (
+                <div
+                  id={`images-${category.id}`}
+                  class={`image-panel ${category.id === "entrantes" ? "active" : ""} hidden [&.active]:flex flex-col sm:flex-row lg:flex-col gap-0 opacity-0 translate-y-[6px] [&.active]:animate-[fadeUp_0.28s_ease_forwards] h-full`}
+                >
+                  {top3.map((item, index) => {
+                    const imageResolver = item.image ? images[item.image] : null;
+                    if (!imageResolver) return null;
+                    return (
+                      <Image
+                        src={imageResolver()}
+                        alt={item.name}
+                        class="w-full h-full lg:h-auto flex-1 object-cover"
+                        loading={category.id === "entrantes" && index === 0 ? "eager" : "lazy"}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </div><!-- /columna-b -->
+      </div><!-- /grid-cols-2 -->
+
+      <!-- CTA -->
+      <div class="mt-12 flex flex-col items-center gap-4 px-5 sm:px-0">
+        <p
+          class="font-body text-[0.82rem] tracking-[0.15em] uppercase text-[#b3b3b3] m-0"
+        >
+          ¿Reservamos una mesa?
+        </p>
+        <a
+          href="#reservas"
+          data-modal="reservation"
+          class="inline-flex items-center justify-center py-3.5 px-10 font-display text-[0.72rem] font-bold tracking-[0.2em] uppercase text-white bg-accent border border-accent rounded-sm no-underline transition-all duration-250 hover:bg-transparent hover:text-accent"
+          >Reservar una Mesa</a
+        >
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  function initTabs() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".tab-btn");
+    const panels = document.querySelectorAll<HTMLElement>(".tab-panel");
+    const imgPanels = document.querySelectorAll<HTMLElement>(".image-panel");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+
+        buttons.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+
+        panels.forEach((p) => p.classList.remove("active"));
+        const panel = document.getElementById(`panel-${target}`);
+        if (panel) panel.classList.add("active");
+
+        imgPanels.forEach((ip) => ip.classList.remove("active"));
+        const imgPanel = document.getElementById(`images-${target}`);
+        if (imgPanel) imgPanel.classList.add("active");
+      });
+    });
+  }
+
+  function adjustTitle() {
+    const span = document.getElementById("carta-title");
+    const h1 = span?.parentElement;
+    if (!span || !h1) return;
+
+    const maxWidth = h1.clientWidth;
+    if (maxWidth <= 0) return;
+
+    let min = 12; // Tamaño mínimo seguro en px
+    let max = 160; // Tamaño máximo en px (aprox 10rem) para que no crezca más en pantallas grandes
+    let optimal = min;
+
+    // Búsqueda binaria para encontrar el tamaño de fuente óptimo en píxeles
+    for (let i = 0; i < 10; i++) {
+      const mid = Math.floor((min + max) / 2);
+      span.style.fontSize = mid + "px";
+
+      if (span.offsetWidth <= maxWidth) {
+        optimal = mid;
+        min = mid + 1;
+      } else {
+        max = mid - 1;
+      }
+    }
+
+    span.style.fontSize = optimal + "px";
+  }
+
+  // Setup tabs
+  initTabs();
+  document.addEventListener("astro:page-load", initTabs);
+
+  // Setup dynamic title sizing
+  window.addEventListener("resize", adjustTitle);
+  document.fonts.ready.then(adjustTitle);
+  document.addEventListener("astro:page-load", adjustTitle);
+  adjustTitle();
+</script>

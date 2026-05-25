@@ -1,0 +1,111 @@
+---
+import { Flame, Instagram, Facebook, MapPin, Clock, Phone } from 'lucide-astro';
+---
+
+<footer class="w-full border-t border-white/5 bg-transparent font-body text-foreground/75 py-12 md:py-16">
+  <div class="mx-auto max-w-7xl px-6 md:px-8">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
+      
+      <!-- Brand & Concept -->
+      <div class="flex flex-col gap-4 md:col-span-1">
+        <a href="/" class="flex items-center gap-2 group w-fit">
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
+            <Flame class="h-5 w-5" />
+          </div>
+          <span class="font-heading text-lg text-foreground">Ahumado & Carbón</span>
+        </a>
+        <p class="text-sm leading-relaxed max-w-xs">
+          Gastronomía rústica urbana. Carnes premium de cocción lenta y hamburguesas con alma de barrio hechas para disfrutar con las manos.
+        </p>
+        <!-- Social Media Icons -->
+        <div class="flex items-center gap-3 mt-2">
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-foreground/80 hover:bg-accent hover:text-background transition-all duration-300" aria-label="Instagram">
+            <Instagram class="h-4 w-4" />
+          </a>
+          <a href="#" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-foreground/80 hover:bg-accent hover:text-background transition-all duration-300" aria-label="Facebook">
+            <Facebook class="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Opening Hours -->
+      <div class="flex flex-col gap-4">
+        <h3 class="font-heading text-base tracking-wider text-foreground">Horarios</h3>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li class="flex items-start gap-2.5">
+            <Clock class="h-4 w-4 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p class="font-medium text-foreground">Martes a Jueves</p>
+              <p class="text-xs text-foreground/50">19:00 - 23:30</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <Clock class="h-4 w-4 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p class="font-medium text-foreground">Viernes y Sábados</p>
+              <p class="text-xs text-foreground/50">12:30 - 16:00 | 19:00 - 00:30</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <Clock class="h-4 w-4 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p class="font-medium text-foreground">Domingos</p>
+              <p class="text-xs text-foreground/50">12:30 - 17:00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location / Address -->
+      <div class="flex flex-col gap-4">
+        <h3 class="font-heading text-base tracking-wider text-foreground">¿Dónde Estamos?</h3>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li class="flex items-start gap-2.5">
+            <MapPin class="h-4 w-4 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p class="font-medium text-foreground">Av. del Fuego 452</p>
+              <p class="text-xs text-foreground/50">Barrio Gastronómico, Ciudad</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <a href="#" class="text-xs text-accent hover:underline font-semibold tracking-wide uppercase transition-all">
+              Ver en Google Maps
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact & Reservations -->
+      <div class="flex flex-col gap-4">
+        <h3 class="font-heading text-base tracking-wider text-foreground">Contacto</h3>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li class="flex items-start gap-2.5">
+            <Phone class="h-4 w-4 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p class="font-medium text-foreground">Reservas & Takeaway</p>
+              <p class="text-xs text-foreground/50">+54 11 4321-8765</p>
+            </div>
+          </li>
+          <li>
+            <a 
+              href="#reservas" 
+              class="inline-flex w-full items-center justify-center rounded-lg border border-accent/30 hover:border-accent text-accent px-4 py-2.5 font-semibold text-center text-sm transition-all duration-300 hover:bg-accent/10"
+            >
+              Reservar una Mesa
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="mt-12 md:mt-16 border-t border-white/5 pt-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-xs text-foreground/40">
+      <p>&copy; {new Date().getFullYear()} Ahumado & Carbón. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-6">
+        <a href="/terminos-y-condiciones" class="hover:text-foreground transition-colors">Términos y Condiciones</a>
+        <a href="/politicas-de-privacidad" class="hover:text-foreground transition-colors">Política de Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>

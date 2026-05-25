@@ -1,0 +1,96 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ReservationModal from "../components/ReservationModal.astro";
+import derechaSketch from "../assets/images/bg-sketch/derecha.png";
+import izquierdaSketch from "../assets/images/bg-sketch/izquierda.png";
+import frameTexture from "../assets/images/bg-sketch/frame.png";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Ahumado & Carbón – Brasería de Barrio | Carnes Premium y Hamburguesas",
+	description = "Ahumado & Carbón ofrece una experiencia rústica urbana de gastronomía a la leña, con carnes premium de cocción lenta y hamburguesas artesanales de autor.",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="src/assets/images/logo.png"
+		/>
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<ClientRouter />
+	</head>
+	<body
+		class="bg-background text-foreground font-body min-h-screen flex flex-col antialiased selection:bg-accent selection:text-background relative"
+	>
+		<!-- Capa de Textura de Granito Fija -->
+		<div
+			class="fixed inset-0 -z-20 pointer-events-none select-none bg-repeat"
+			style={`background-image: url('${frameTexture.src}'); background-size: 200px 200px;`}
+		>
+		</div>
+
+		<!-- Capa de Bocetos Rústicos Fijos -->
+		<div
+			class="fixed inset-0 -z-10 pointer-events-none select-none overflow-hidden"
+		>
+			<!-- Derecha: desde arriba hacia abajo -->
+			<div
+				class="absolute rotate-[25deg] right-[-60px] top-[-40px] w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[480px] opacity-[0.15] sm:opacity-[0.18]"
+			>
+				<img src={derechaSketch.src} alt="" class="w-full h-auto" />
+			</div>
+
+			<!-- Izquierda: desde abajo hacia arriba -->
+			<div
+				class="absolute left-[-60px] bottom-[-20px] rotate-[10deg] w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[480px] opacity-[0.15] sm:opacity-[0.18]"
+			>
+				<img src={izquierdaSketch.src} alt="" class="w-full h-auto" />
+			</div>
+		</div>
+
+		<!-- Contenedor Principal de la Página -->
+		<div class="relative z-10 flex flex-col min-h-screen">
+			<!-- Navigation Bar -->
+			<Navbar />
+
+			<!-- Main Content Slot -->
+			<main class="flex-grow">
+				<slot />
+			</main>
+
+			<!-- Footer -->
+			<Footer />
+		</div>
+
+		<!-- Reservation Modal -->
+		<ReservationModal />
+
+		<!-- WhatsApp Button -->
+		<WhatsAppButton />
+
+		<!-- Smooth Scroll Init -->
+		<script>
+			import Lenis from "lenis";
+
+			const lenis = new Lenis({
+				autoRaf: true,
+			});
+		</script>
+	</body>
+</html>

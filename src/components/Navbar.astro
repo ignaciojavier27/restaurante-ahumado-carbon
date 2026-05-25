@@ -1,0 +1,211 @@
+---
+import { Menu, UtensilsCrossed } from "lucide-astro";
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.png";
+---
+
+<header
+  id="navbar"
+  class="sticky top-0 z-50 w-full bg-transparent transition-transform duration-500 ease-in-out"
+>
+  <div id="navbar-top" class="relative z-50 w-full overflow-hidden transition-colors duration-300">
+    <!-- Navbar Container -->
+    <div
+      class="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-4 md:px-8"
+    >
+      <!-- Left side links -->
+      <nav
+        class="hidden lg:flex flex-1 items-center justify-start gap-1 font-body"
+      >
+        <a
+          href="/"
+          class="rounded-full bg-accent hover:bg-accent/80 px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-bold uppercase text-background transition-all duration-300"
+        >
+          Inicio
+        </a>
+        <a
+          href="/carta"
+          class="rounded-full bg-accent hover:bg-accent/80 px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-bold uppercase text-background transition-all duration-300"
+        >
+          Menú
+        </a>
+        <a
+          href="/historia"
+          class="rounded-full bg-accent hover:bg-accent/80 px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-bold uppercase text-background transition-all duration-300"
+        >
+          Historia
+        </a>
+        <a
+          href="/galeria"
+          class="rounded-full bg-accent hover:bg-accent/80 px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-bold uppercase text-background transition-all duration-300"
+        >
+          Galería
+        </a>
+      </nav>
+
+      <!-- Center Logo -->
+      <div class="flex flex-shrink-0 justify-center z-10 px-4">
+        <a
+          href="/"
+          class="group transition-transform duration-300 hover:scale-105"
+        >
+          <Image
+            src={logo}
+            alt="Ahumado & Carbón Logo"
+            class="h-16 md:h-20 lg:h-22 w-auto object-contain"
+          />
+        </a>
+      </div>
+
+      <!-- Right side links -->
+      <div
+        class="hidden lg:flex flex-1 items-center justify-end gap-1 font-body"
+      >
+        <a
+          href="/contacto"
+          class="rounded-full bg-accent hover:bg-accent/80 px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-bold uppercase text-background transition-all duration-300"
+        >
+          Contacto
+        </a>
+        <a
+          href="#reservas"
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-3 xl:px-4 py-3.5 xl:py-4 text-[11px] xl:text-[12px] font-black uppercase text-background hover:bg-accent/80 hover:shadow-lg hover:shadow-accent/20 transition-all duration-300"
+        >
+          Reservar
+          <UtensilsCrossed class="h-3 w-3 xl:h-4 xl:w-4" />
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="flex h-12 w-12 items-center justify-center rounded-lg text-accent hover:bg-white/5 active:bg-white/10 lg:hidden transition-colors"
+        aria-label="Abrir menú de navegación"
+      >
+        <Menu class="h-8 w-8" />
+      </button>
+    </div>
+
+    <!-- Dotted border bottom -->
+    <div
+      class="absolute bottom-1 left-0 right-0 w-full border-b-[4px] border-dotted border-accent pointer-events-none"
+    >
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 hidden flex-col bg-background/98 backdrop-blur-md pt-[100px] px-6 pb-6 lg:hidden transition-all duration-300 ease-in-out font-display overflow-y-auto"
+  >
+    <div class="flex flex-col gap-6 items-center text-center">
+      <a
+        href="/"
+        class="mobile-link text-xl font-semibold uppercase tracking-wider text-accent/80 hover:text-accent py-2 transition-colors"
+      >
+        Inicio
+      </a>
+      <a
+        href="/carta"
+        class="mobile-link text-xl font-semibold uppercase tracking-wider text-accent/80 hover:text-accent py-2 transition-colors"
+      >
+        Menú
+      </a>
+      <a
+        href="/historia"
+        class="mobile-link text-xl font-semibold uppercase tracking-wider text-accent/80 hover:text-accent py-2 transition-colors"
+      >
+        Historia
+      </a>
+      <a
+        href="/galeria"
+        class="mobile-link text-xl font-semibold uppercase tracking-wider text-accent/80 hover:text-accent py-2 transition-colors"
+      >
+        Galería
+      </a>
+      <a
+        href="/contacto"
+        class="mobile-link text-xl font-semibold uppercase tracking-wider text-accent/80 hover:text-accent py-2 transition-colors"
+      >
+        Contacto
+      </a>
+      <hr class="border-accent/20 w-full max-w-xs my-2" />
+      <a
+        href="#reservas"
+        class="mobile-link flex w-full max-w-[250px] items-center justify-center gap-2 rounded-full bg-accent py-4 font-semibold uppercase tracking-wider text-background hover:bg-accent/90 transition-colors"
+      >
+        Reservar
+        <UtensilsCrossed class="h-5 w-5" />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupNavbar() {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    const navbarTop = document.getElementById("navbar-top");
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener("click", () => {
+        const isHidden = mobileMenu.classList.contains("hidden");
+        if (isHidden) {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("flex");
+          document.body.style.overflow = "hidden";
+          if (navbarTop) navbarTop.classList.add("bg-background");
+        } else {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.remove("flex");
+          document.body.style.overflow = "";
+          if (navbarTop) navbarTop.classList.remove("bg-background");
+        }
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.remove("flex");
+          document.body.style.overflow = "";
+          if (navbarTop) navbarTop.classList.remove("bg-background");
+        });
+      });
+    }
+
+    // Navbar scroll animation
+    const navbar = document.getElementById("navbar");
+    let lastScrollY = window.scrollY;
+
+    // Clean up previous event listener if it exists to avoid duplicates
+    if (window._navbarScrollHandler) {
+      window.removeEventListener("scroll", window._navbarScrollHandler);
+    }
+
+    if (navbar) {
+      window._navbarScrollHandler = () => {
+        const currentScrollY = window.scrollY;
+
+        // Keep it visible if we are at the very top of the page
+        if (currentScrollY < 50) {
+          navbar.classList.remove("-translate-y-[calc(100%_-_8px)]");
+        } else if (currentScrollY > lastScrollY) {
+          // Scrolling down -> hide navbar but leave 8px (to show dots)
+          navbar.classList.add("-translate-y-[calc(100%_-_8px)]");
+        } else {
+          // Scrolling up -> show navbar
+          navbar.classList.remove("-translate-y-[calc(100%_-_8px)]");
+        }
+
+        lastScrollY = currentScrollY;
+      };
+
+      window.addEventListener("scroll", window._navbarScrollHandler, { passive: true });
+    }
+  }
+
+  // Ejecutar en la carga inicial y después de cada transición de vista (ClientRouter)
+  document.addEventListener('astro:page-load', setupNavbar);
+</script>
